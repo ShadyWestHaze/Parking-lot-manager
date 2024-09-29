@@ -1,0 +1,19 @@
+type ParkingSpot {
+    id: ID!
+    name: String!
+    reserved: Boolean!
+}
+
+type Query {
+    parkingSpots: [ParkingSpot]
+    parkingSpot(id: ID!): ParkingSpot
+}
+
+type Mutation {
+    createParkingSpot(name: String!): ParkingSpot
+    reserveParkingSpot(id: ID!): ParkingSpot
+}
+
+type Subscription {
+    parkingSpotStatus: ParkingSpot
+}
