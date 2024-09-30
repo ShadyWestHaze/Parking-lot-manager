@@ -27,9 +27,10 @@ class ParkingSpotServiceTest {
 
     @Test
     void testCreateParkingSpotWithNullName() {
-        Mono<ParkingSpot> result = parkingSpotService.createParkingSpot(null);
-        assertNotEquals(Boolean.TRUE, result.hasElement().block());
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> parkingSpotService.createParkingSpot(null).block());
+        assertEquals("Parking spot name cannot be empty or null", exception.getMessage());
     }
+
 
     @Test
     void testCreateParkingSpotWithValidName() {

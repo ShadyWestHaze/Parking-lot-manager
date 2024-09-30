@@ -17,7 +17,7 @@ public class ParkingSpotService {
 
     public Mono<ParkingSpot> createParkingSpot(String spotName) {
         if (spotName == null || spotName.isEmpty()) {
-            return Mono.empty();
+            return Mono.error(new IllegalArgumentException("Parking spot name cannot be empty or null"));
         }
         ParkingSpot parkingSpot = new ParkingSpot(spotName);
         return parkingSpotRepository.save(parkingSpot);

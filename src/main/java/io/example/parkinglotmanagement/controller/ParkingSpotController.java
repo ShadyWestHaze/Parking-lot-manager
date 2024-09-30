@@ -21,10 +21,7 @@ public class ParkingSpotController {
     @PostMapping
     public Mono<ResponseEntity<ParkingSpot>> createParkingSpot(@RequestBody ParkingSpot parkingSpot) {
         return parkingSpotService.createParkingSpot(parkingSpot.getName())
-                .map(spot -> {
-                    ResponseEntity<ParkingSpot> response = ResponseEntity.status(HttpStatus.CREATED).body(spot);
-                    return response;
-                })
+                .map(spot -> ResponseEntity.status(HttpStatus.CREATED).body(spot))
                 .onErrorResume(e -> Mono.just(ResponseEntity.badRequest().build()));
     }
 
